@@ -1,0 +1,2 @@
+# Plugins and Mods
+When setting up your MINECRAFT server, you might find yourself wanting mods or plugins in order to boost performance, have a more customized experience, or in order to better administrate the server by preventing grief and/or cheating. Docker allows for this to be done very easily.  
