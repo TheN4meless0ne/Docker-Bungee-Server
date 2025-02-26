@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  bungeecord:
+    image: itzg/bungeecord
+    container_name: bungeecord
+    ports:
+      - "25565:25577" # first port is the internal server port, second port is the outgoing port
+    environment:
+      EULA: "TRUE" # must be set to true
+      ONLINE_MODE: "FALSE"
+    volumes:
+      - ./data/bungeecord:/server # makes sure the data is saved locally
+    restart: unless-stopped # restart the container if it crashes
+
+  mc-lobby:
+    image: itzg/minecraft-server
+    container_name: mc-lobby
+    ports:
+      - "25566:25565" # first port is adjustable, second port must be the same as the internal server port
+    environment:
+      EULA: "TRUE" # must be set to true
+      ONLINE_MODE: "FALSE"
+      MOTD: "<motd>"
+      LEVEL: mc-lobby
+      TYPE: <server_type> # i.e. PAPER, SPIGOT, etc
+      VERSION: <version> # i.e. 1.17.1, 1.16.5, etc
+      MEMORY: <amount>G # i.e. 1G, 2G, 4G, etc
+      MODRINTH_PROJECTS: | # or CURSEFORGE_FILES # see the PROJECTS.md file for more information about this
+        <project>
+      RCON_CMDS_STARTUP:  |-
+        op <your_username>
+    volumes:
+      - ./data/mc-lobby:/data # makes sure the data is saved locally
+    restart: unless-stopped # restart the container if it crashes
+
+  mc-plots:
+    image: itzg/minecraft-server
+    container_name: mc-plots
+    ports:
+      - "25567:25565" # first port is adjustable, second port must be the same as the internal server port
+    environment:
+      EULA: "TRUE" # must be set to true
+      ONLINE_MODE: "FALSE"
+      MOTD: "<motd>"
+      LEVEL: mc-plot_world
+      LEVEL_TYPE: FLAT
+      TYPE: <server_type> # i.e. PAPER, SPIGOT, etc
+      VERSION: <version> # i.e. 1.17.1, 1.16.5, etc
+      MEMORY: <amount>G # i.e. 1G, 2G, 4G, etc
+      MODRINTH_PROJECTS: | # or CURSEFORGE_FILES # see the PROJECTS.md file for more information about this
+        <project>
+      RCON_CMDS_STARTUP:  |-
+        op <your_username>
+        pregen 1000
+    volumes:
+      - ./data/mc-plots:/data # makes sure the data is saved locally
+    restart: unless-stopped # restart the container if it crashes

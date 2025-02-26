@@ -1,0 +1,61 @@
+connection_throttle: 4000
+online_mode: true
+remote_ping_timeout: 5000
+groups:
+  md_5:
+  - admin
+servers: # list of servers repeated for each server
+  lobby:
+    motd: '<motd>'
+    address: host.docker.internal:25566 # host.docker.internal is used to connect to the host machine
+    restricted: false
+  plots:
+    motd: '<motd>'
+    address: host.docker.internal:25567 # same as above
+    restricted: false
+remote_ping_cache: -1
+connection_throttle_limit: 3
+enforce_secure_profile: false
+listeners:
+- query_port: 25577
+  motd: '<motd>' # displayed in the server list
+  tab_list: GLOBAL_PING
+  query_enabled: false
+  proxy_protocol: false
+  forced_hosts:
+    pvp.md-5.net: pvp
+  ping_passthrough: false
+  priorities:
+  - lobby
+  bind_local_address: true
+  host: 0.0.0.0:25577
+  max_players: 2025 # max players across all servers, individual server limits are set in their respective server.properties
+  tab_size: 60 # tab list size
+  force_default_server: true # if true, players will log on in the default server (lobby) else, they will log on in the last server they were in
+server_connect_timeout: 5000 # timeout for server connection
+player_limit: -1 # -1 for no limit on players
+max_packets_per_second: 4096
+ip_forward: false
+disabled_commands:
+- disabledcommandhere
+log_pings: true
+max_packets_data_per_second: 33554432
+forge_support: false
+log_commands: false
+stats: 2d0ba254-c3ee-4070-a219-53ffdf9f32c2
+reject_transfers: false
+network_compression_threshold: 256
+permissions:
+  default:
+  - bungeecord.command.server
+  - bungeecord.command.list
+  admin:
+  - bungeecord.command.alert
+  - bungeecord.command.end
+  - bungeecord.command.ip
+  - bungeecord.command.reload
+  - bungeecord.command.kick
+  - bungeecord.command.send
+  - bungeecord.command.find
+prevent_proxy_connections: false
+timeout: 30000
