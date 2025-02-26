@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  bungeecord:
+  bungeecord: # set this to i.e. "mc-<gamemode/theme>_<version>" to easily locate it for maintenance
     image: itzg/bungeecord
-    container_name: bungeecord
+    container_name: bungeecord # set this to be the same as the service name
     ports:
       - "25565:25577" # first port is the internal server port, second port is the outgoing port
     environment:
@@ -13,16 +13,16 @@ services:
       - ./data/bungeecord:/server # makes sure the data is saved locally
     restart: unless-stopped # restart the container if it crashes
 
-  mc-lobby:
+  mc-lobby: # set this to i.e. "mc-<gamemode/theme>_<version>" to easily locate it for maintenance
     image: itzg/minecraft-server
-    container_name: mc-lobby
+    container_name: mc-lobby # set this to be the same as the service name
     ports:
       - "25566:25565" # first port is adjustable, second port must be the same as the internal server port
     environment:
       EULA: "TRUE" # must be set to true
       ONLINE_MODE: "FALSE"
       MOTD: "<motd>"
-      LEVEL: mc-lobby
+      LEVEL: mc-lobby # name of the world folder
       TYPE: <server_type> # i.e. PAPER, SPIGOT, etc
       VERSION: <version> # i.e. 1.17.1, 1.16.5, etc
       MEMORY: <amount>G # i.e. 1G, 2G, 4G, etc
@@ -34,16 +34,16 @@ services:
       - ./data/mc-lobby:/data # makes sure the data is saved locally
     restart: unless-stopped # restart the container if it crashes
 
-  mc-plots:
+  mc-plots: # set this to i.e. "mc-<gamemode/theme>_<version>" to easily locate it for maintenance
     image: itzg/minecraft-server
-    container_name: mc-plots
+    container_name: mc-plots # set this to be the same as the service name
     ports:
       - "25567:25565" # first port is adjustable, second port must be the same as the internal server port
     environment:
       EULA: "TRUE" # must be set to true
       ONLINE_MODE: "FALSE"
       MOTD: "<motd>"
-      LEVEL: mc-plot_world
+      LEVEL: mc-plot_world # name of the world folder
       LEVEL_TYPE: FLAT
       TYPE: <server_type> # i.e. PAPER, SPIGOT, etc
       VERSION: <version> # i.e. 1.17.1, 1.16.5, etc
